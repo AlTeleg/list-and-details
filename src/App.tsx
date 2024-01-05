@@ -1,25 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import List from './components/List';
+import Details from './components/Details';
+import { Info } from './components/Details';
+
+const DATA = 'https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/';
 
 function App() {
+  const [selectedInfo, setSelectedInfo] = useState<Info | null>(null);
+  const [isDetailsVisible, setIsDetailsVisible] = useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <List data={DATA} setSelectedInfo={setSelectedInfo} setIsDetailsVisible={setIsDetailsVisible}/>
+      <Details data={DATA} info={selectedInfo} isVisible={isDetailsVisible}/>
+    </>
   );
 }
 
